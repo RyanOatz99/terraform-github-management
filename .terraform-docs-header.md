@@ -3,6 +3,14 @@
 
 Terraform module which manages your GitHub personal/organization's repositories, members and teams.
 
+These types of resources are supported:
+
+ * [GitHub membership](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/membership)
+ * [GitHub team](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team)
+ * [GitHub team membership](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_membership)
+ * [GitHub repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/repository)
+ * [GitHub team repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_repository)
+
 ## Examples
 
  * [Organization](https://github.com/sh0shin/terraform-module-github/tree/master/examples/organization/main.tf)
