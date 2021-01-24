@@ -6,7 +6,7 @@ variable "github_memberships" {
   type = map(object({
     role = string
   }))
-  default = {}
+  default = {} # empty/skip
 }
 
 # github_team
@@ -16,7 +16,7 @@ variable "github_teams" {
     description = string
     privacy     = string
   }))
-  default = {}
+  default = {} # empty/skip
 }
 
 # github_team_membership
@@ -25,7 +25,7 @@ variable "github_team_members" {
   type = map(object({
     role = string
   }))
-  default = {}
+  default = {} # empty/skip
 }
 
 # github_repository
@@ -70,5 +70,5 @@ variable "github_team_repositories" {
     team_name  = string
     permission = string
   }))
-  default = {}
+  default = {} # empty/skip
 }
