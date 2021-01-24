@@ -2,7 +2,7 @@
 
 # github_membership
 variable "github_memberships" {
-  description = ""
+  description = "Add/remove users from your organization."
   type = map(object({
     role = string
   }))
@@ -11,7 +11,7 @@ variable "github_memberships" {
 
 # github_team
 variable "github_teams" {
-  description = ""
+  description = "Add/remove teams from your organization."
   type = map(object({
     description = string
     privacy     = string
@@ -21,7 +21,7 @@ variable "github_teams" {
 
 # github_team_membership
 variable "github_team_members" {
-  description = ""
+  description = "Add/remove users from teams in your organization."
   type = map(object({
     role = string
   }))
@@ -30,7 +30,7 @@ variable "github_team_members" {
 
 # github_repository
 variable "github_repositories" {
-  description = ""
+  description = "Create and manage repositories within your GitHub organization or personal account."
   type = map(object({
     description            = string
     homepage_url           = string
@@ -65,7 +65,7 @@ variable "github_repositories" {
 
 # github_team_repository
 variable "github_team_repositories" {
-  description = ""
+  description = "Manages relationships between teams and repositories in your GitHub organization."
   type = map(object({
     team_name  = string
     permission = string
