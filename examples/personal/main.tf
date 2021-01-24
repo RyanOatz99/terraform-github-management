@@ -9,16 +9,15 @@ terraform {
 }
 
 provider "github" {
-  owner = "my-github-account" # or use `export GITHUB_OWNER="my-github-account"`
-  token = "my-github-token"   # or use `export GITHUB_TOKEN="my-github-token"`
+  owner = "my_github_account" # or use `export GITHUB_OWNER="my_github_account"`
+  token = "my_github_token"   # or use `export GITHUB_TOKEN="my_github_token"`
 }
 
 module "github-personal" {
   source = "../.."
 
   github_repositories = {
-    # my-repo
-    "my-repo" = {
+    "my-repo" = { # repository name
       description            = "My GitHub repository"
       homepage_url           = "https://my-repo.tld"
       visibility             = "public"
@@ -45,12 +44,12 @@ module "github-personal" {
       #  path   = "/"
       #  cname  = null
       #}]
-      pages = [] # to disable/skip
+      pages = [] # disable/skip
       #template = [{
       #  owner      = "my-github-account"
       #  repository = "my-github-template"
       #}]
-      template = [] # to disable/skip
+      template = [] # disable/skip
     },
 
     # more...
