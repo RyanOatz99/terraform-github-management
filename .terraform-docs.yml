@@ -1,0 +1,29 @@
+---
+
+formatter: markdown document
+header-from: .terraform-docs-header.md
+
+sections:
+  hide-all: true
+  show:
+    - header
+    - inputs
+    - outputs
+    - providers
+    - requirements
+
+#output-values:
+#  enabled: true
+#  from: ""
+
+sort:
+  enabled: true
+  by:
+    - required
+
+settings:
+  color: true
+  escape: false
+  indent: 2
+  required: true
+  sensitive: true
