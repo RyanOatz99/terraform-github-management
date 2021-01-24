@@ -1,6 +1,13 @@
 [//]: # ( vim: set ft=markdown : )
 # GitHub Terraform module
 
+Terraform module which manages your GitHub personal/organization's repositories, members and teams.
+
+## Examples
+
+ * [Organization](https://github.com/sh0shin/terraform-module-github/tree/master/examples/organization/main.tf)
+ * [Personal](https://github.com/sh0shin/terraform-module-github/blob/master/examples/personal/main.tf)
+
 ## Requirements
 
 The following requirements are needed by this module:
