@@ -43,7 +43,7 @@ resource "github_team" "child" {
   name           = each.key
   description    = each.value.description
   privacy        = "closed" #each.value.privacy
-  parent_team_id = each.value.parent_team
+  parent_team_id = github_team.root[each.value.parent_team].id
 }
 
 locals {
