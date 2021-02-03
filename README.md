@@ -11,6 +11,9 @@ These types of resources are supported:
  * [GitHub repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/repository)
  * [GitHub team repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_repository)
 
+ * [GitHub user's GPG](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_gpg_key)
+ * [GitHub user's SSH key](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_ssh_key)
+
 ## Examples
 
  * [Organization](https://github.com/sh0shin/terraform-module-github/tree/master/examples/organization/main.tf)
