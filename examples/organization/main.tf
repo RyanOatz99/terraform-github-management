@@ -28,7 +28,7 @@ module "github-organization" {
     # ...
   }
 
-  github_teams = {
+  github_team_roots = {
     "admin" = { # team name
       description = "Organization Admin"
       privacy     = "secret"
@@ -42,12 +42,19 @@ module "github-organization" {
     # ...
   }
 
+  github_team_childs = {
+    "terraform" = {
+      description = "Terraformer"
+      parent_team = "developer"
+    },
+  }
+
   github_team_members = {
-    "developer-my_github_member" = { # using <team_name>-<member_name>
+    "developer/my_github_member" = { # using <team_name>/<member_name>
       role = "member"
     },
 
-    "admin-my_github_admin" = {
+    "admin/my_github_admin" = {
       role = "maintainer"
     },
 
@@ -63,32 +70,34 @@ module "github-organization" {
       has_projects           = false
       has_wiki               = false
       is_template            = false
-      allow_merge_commit     = null
-      allow_squash_merge     = null
-      allow_rebase_merge     = null
-      delete_branch_on_merge = null
+      allow_merge_commit     = true
+      allow_squash_merge     = true
+      allow_rebase_merge     = true
+      delete_branch_on_merge = false
       auto_init              = false
       gitignore_template     = null
       license_template       = null
       archived               = false
       archive_on_destroy     = false
+      vulnerability_alerts   = true
       topics = [
         "github",
         "organization",
         "terraform",
       ]
-      vulnerability_alerts = true
-      #pages = [{
-      #  branch = "gh-pages"
-      #  path   = "/"
-      #  cname  = null
-      #}]
-      pages = [] # disable/skip
-      #template = [{
-      #  owner      = "my-github-organization"
-      #  repository = "my-github-template"
-      #}]
-      template = [] # disable/skip
+      #pages = {
+      #  "gh-pages" = {
+      #    path  = "/"
+      #    cname = null
+      #  }
+      #}
+      pages = {} # disable/skip
+      #template = {
+      #  "my-github-template" = {
+      #    owner = "my-github-organization"
+      #  }
+      #}
+      template = {} # disable/skip
     },
 
     # ...
