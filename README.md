@@ -22,13 +22,13 @@ The following requirements are needed by this module:
 
 - terraform (~>0.14)
 
-- github (=4.3.0)
+- github (=4.3.2)
 
 ## Providers
 
 The following providers are used by this module:
 
-- github (=4.3.0)
+- github (=4.3.2)
 
 ## Required Inputs
 
@@ -46,6 +46,7 @@ Type:
 
 ```hcl
 map(object({
+    # key = username
     role = string
   }))
 ```
@@ -60,6 +61,7 @@ Type:
 
 ```hcl
 map(object({
+    # key = name
     description            = string
     homepage_url           = string
     visibility             = string
@@ -76,17 +78,36 @@ map(object({
     license_template       = string
     archived               = bool
     archive_on_destroy     = bool
-    topics                 = list(string)
     vulnerability_alerts   = bool
-    pages = list(object({
-      branch = string
-      path   = string
-      cname  = string
+    topics                 = list(string)
+
+    pages = map(object({
+      # key = branch
+      path  = string
+      cname = string
     }))
-    template = list(object({
-      owner      = string
-      repository = string
+
+    template = map(object({
+      # key = repository
+      owner = string
     }))
+  }))
+```
+
+Default: `{}`
+
+### github_team_childs
+
+Description: Add/remove teams with parent from your organization.
+
+Type:
+
+```hcl
+map(object({
+    # key = name
+    description = string
+    #privacy     = string # always closed
+    parent_team = string
   }))
 ```
 
@@ -100,6 +121,7 @@ Type:
 
 ```hcl
 map(object({
+    # key = teamname/username
     role = string
   }))
 ```
@@ -114,6 +136,7 @@ Type:
 
 ```hcl
 map(object({
+    # key = repository
     team_name  = string
     permission = string
   }))
@@ -121,7 +144,7 @@ map(object({
 
 Default: `{}`
 
-### github_teams
+### github_team_roots
 
 Description: Add/remove teams from your organization.
 
@@ -129,8 +152,39 @@ Type:
 
 ```hcl
 map(object({
+    # key = name
     description = string
     privacy     = string
+  }))
+```
+
+Default: `{}`
+
+### github_user_gpg_keys
+
+Description: Add/remove GPG keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title/name
+    armored_public_key = string
+  }))
+```
+
+Default: `{}`
+
+### github_user_ssh_keys
+
+Description: Add/remove SSH keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title
+    key = string
   }))
 ```
 
@@ -152,7 +206,11 @@ Description: URLs that can be provided to `git clone` to clone the repository vi
 
 Description: URLs that can be provided to `git clone` to clone the repository via SSH.
 
-### team_ids
+### team_child_ids
 
-Description: The IDs of the created teams.
+Description: The IDs of the created child teams.
+
+### team_root_ids
+
+Description: The IDs of the created root teams.
 
