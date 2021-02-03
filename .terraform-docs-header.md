@@ -5,14 +5,14 @@ Terraform module which manages your GitHub personal/organization's repositories,
 
 These types of resources are supported:
 
- * [GitHub membership](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/membership)
- * [GitHub team](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team)
- * [GitHub team membership](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_membership)
- * [GitHub repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/repository)
- * [GitHub team repository](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_repository)
+ * [GitHub membership](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership)
+ * [GitHub team](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team)
+ * [GitHub team membership](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership)
+ * [GitHub repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository)
+ * [GitHub team repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository)
 
- * [GitHub user's GPG](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_gpg_key)
- * [GitHub user's SSH key](https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_ssh_key)
+ * [GitHub user's GPG](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_gpg_key)
+ * [GitHub user's SSH key](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_ssh_key)
 
 ## Examples
 

@@ -7,7 +7,7 @@ terraform {
   required_providers {
 
     # integrations/github
-    # https://registry.terraform.io/providers/integrations/github/4.3.0/docs
+    # https://registry.terraform.io/providers/integrations/github/latest/docs
     github = {
       source  = "integrations/github"
       version = "=4.3.2"

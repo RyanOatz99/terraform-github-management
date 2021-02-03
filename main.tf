@@ -1,7 +1,7 @@
 # vim: set ft=terraform :
 
 # github_user_ssh_key
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_ssh_key
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_ssh_key
 resource "github_user_ssh_key" "this" {
   for_each = var.github_user_ssh_keys
 
@@ -10,7 +10,7 @@ resource "github_user_ssh_key" "this" {
 }
 
 # github_user_gpg_key
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/user_gpg_key
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_gpg_key
 resource "github_user_gpg_key" "this" {
   for_each = var.github_user_gpg_keys
 
@@ -19,7 +19,7 @@ resource "github_user_gpg_key" "this" {
 }
 
 # github_membership
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/membership
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership
 resource "github_membership" "this" {
   for_each = var.github_memberships
 
@@ -28,7 +28,7 @@ resource "github_membership" "this" {
 }
 
 # github_team
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team
 resource "github_team" "root" {
   for_each = var.github_team_roots
 
@@ -51,7 +51,7 @@ locals {
 }
 
 # github_team_membership
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_membership
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership
 resource "github_team_membership" "this" {
   for_each = var.github_team_members
   depends_on = [
@@ -65,7 +65,7 @@ resource "github_team_membership" "this" {
 }
 
 # github_repository
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/repository
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
 resource "github_repository" "this" {
   for_each = var.github_repositories
   depends_on = [
@@ -116,7 +116,7 @@ resource "github_repository" "this" {
 }
 
 # github_team_repository
-# https://registry.terraform.io/providers/integrations/github/4.3.0/docs/resources/team_repository
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository
 resource "github_team_repository" "this" {
   depends_on = [
     github_team.root,
