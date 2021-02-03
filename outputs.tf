@@ -1,9 +1,14 @@
 # vim: set ft=terraform :
 
 # github_team
-output "team_ids" {
-  description = "The IDs of the created teams."
-  value       = { for team in github_team.this : team.name => team.id }
+output "team_root_ids" {
+  description = "The IDs of the created root teams."
+  value       = { for team in github_team.root : team.name => team.id }
+}
+
+output "team_child_ids" {
+  description = "The IDs of the created child teams."
+  value       = { for team in github_team.child : team.name => team.id }
 }
 
 # github_repository
