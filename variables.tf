@@ -35,8 +35,9 @@ variable "github_team_roots" {
   description = "Add/remove teams from your organization."
   type = map(object({
     # key = name
-    description = string
-    privacy     = string
+    description               = string
+    privacy                   = string
+    create_default_maintainer = bool
   }))
   default = {} # empty/skip
 }
@@ -47,7 +48,8 @@ variable "github_team_childs" {
     # key = name
     description = string
     #privacy     = string # always closed
-    parent_team = string
+    parent_team               = string
+    create_default_maintainer = bool
   }))
   default = {} # empty/skip
 }
