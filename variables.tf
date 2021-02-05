@@ -97,7 +97,6 @@ variable "github_repositories" {
       owner = string
     }))
   }))
-  default = {}
 }
 
 # github_team_repository

@@ -35,26 +35,7 @@ The following providers are used by this module:
 
 ## Required Inputs
 
-No required input.
-
-## Optional Inputs
-
-The following input variables are optional (have default values):
-
-### github_memberships
-
-Description: Add/remove users from your organization.
-
-Type:
-
-```hcl
-map(object({
-    # key = username
-    role = string
-  }))
-```
-
-Default: `{}`
+The following input variables are required:
 
 ### github_repositories
 
@@ -94,6 +75,23 @@ map(object({
       # key = repository
       owner = string
     }))
+  }))
+```
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### github_memberships
+
+Description: Add/remove users from your organization.
+
+Type:
+
+```hcl
+map(object({
+    # key = username
+    role = string
   }))
 ```
 
