@@ -17,7 +17,7 @@ sections:
 #  from: ""
 
 sort:
-  enabled: true
+  enabled: false
   by:
     - required
 
