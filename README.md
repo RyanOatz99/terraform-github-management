@@ -25,13 +25,13 @@ The following requirements are needed by this module:
 
 - terraform (~>0.14)
 
-- github (=4.3.2)
+- github (=4.4.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- github (=4.3.2)
+- github (=4.4.0)
 
 ## Required Inputs
 
@@ -82,6 +82,36 @@ map(object({
 
 The following input variables are optional (have default values):
 
+### github_user_ssh_keys
+
+Description: Add/remove SSH keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title
+    key = string
+  }))
+```
+
+Default: `{}`
+
+### github_user_gpg_keys
+
+Description: Add/remove GPG keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title/name
+    armored_public_key = string
+  }))
+```
+
+Default: `{}`
+
 ### github_memberships
 
 Description: Add/remove users from your organization.
@@ -92,6 +122,23 @@ Type:
 map(object({
     # key = username
     role = string
+  }))
+```
+
+Default: `{}`
+
+### github_team_roots
+
+Description: Add/remove teams from your organization.
+
+Type:
+
+```hcl
+map(object({
+    # key = name
+    description               = string
+    privacy                   = string
+    create_default_maintainer = bool
   }))
 ```
 
@@ -108,7 +155,8 @@ map(object({
     # key = name
     description = string
     #privacy     = string # always closed
-    parent_team = string
+    parent_team               = string
+    create_default_maintainer = bool
   }))
 ```
 
@@ -145,55 +193,17 @@ map(object({
 
 Default: `{}`
 
-### github_team_roots
-
-Description: Add/remove teams from your organization.
-
-Type:
-
-```hcl
-map(object({
-    # key = name
-    description = string
-    privacy     = string
-  }))
-```
-
-Default: `{}`
-
-### github_user_gpg_keys
-
-Description: Add/remove GPG keys from your user account.
-
-Type:
-
-```hcl
-map(object({
-    # key = title/name
-    armored_public_key = string
-  }))
-```
-
-Default: `{}`
-
-### github_user_ssh_keys
-
-Description: Add/remove SSH keys from your user account.
-
-Type:
-
-```hcl
-map(object({
-    # key = title
-    key = string
-  }))
-```
-
-Default: `{}`
-
 ## Outputs
 
 The following outputs are exported:
+
+### team_root_ids
+
+Description: The IDs of the created root teams.
+
+### team_child_ids
+
+Description: The IDs of the created child teams.
 
 ### repo_git_clone_urls
 
@@ -206,12 +216,4 @@ Description: URLs that can be provided to `git clone` to clone the repository vi
 ### repo_ssh_clone_urls
 
 Description: URLs that can be provided to `git clone` to clone the repository via SSH.
-
-### team_child_ids
-
-Description: The IDs of the created child teams.
-
-### team_root_ids
-
-Description: The IDs of the created root teams.
 
