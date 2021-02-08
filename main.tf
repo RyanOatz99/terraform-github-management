@@ -24,7 +24,7 @@ resource "github_membership" "this" {
   for_each = var.github_memberships
 
   username = each.key
-  role     = each.value.role
+  role     = each.value
 }
 
 # github_team
@@ -35,7 +35,7 @@ resource "github_team" "root" {
   name                      = each.key
   description               = each.value.description
   privacy                   = each.value.privacy
-  create_default_maintainer = each.value.create_default_maintainer
+  create_default_maintainer = each.value.maintainer
 }
 
 resource "github_team" "child" {
@@ -45,7 +45,7 @@ resource "github_team" "child" {
   description               = each.value.description
   privacy                   = "closed" #each.value.privacy
   parent_team_id            = github_team.root[each.value.parent_team].id
-  create_default_maintainer = each.value.create_default_maintainer
+  create_default_maintainer = each.value.maintainer
 }
 
 locals {
@@ -63,7 +63,7 @@ resource "github_team_membership" "this" {
 
   team_id  = local.github_teams[split("/", each.key)[0]].id
   username = split("/", each.key)[1]
-  role     = each.value.role
+  role     = each.value
 }
 
 # github_repository

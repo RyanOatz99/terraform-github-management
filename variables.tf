@@ -23,11 +23,8 @@ variable "github_user_gpg_keys" {
 # github_membership
 variable "github_memberships" {
   description = "Add/remove users from your organization."
-  type = map(object({
-    # key = username
-    role = string
-  }))
-  default = {} # empty/skip
+  type        = map(string) # "username" = "role"
+  default     = {}
 }
 
 # github_team
@@ -35,9 +32,9 @@ variable "github_team_roots" {
   description = "Add/remove teams from your organization."
   type = map(object({
     # key = name
-    description               = string
-    privacy                   = string
-    create_default_maintainer = bool
+    description = string
+    privacy     = string
+    maintainer  = bool
   }))
   default = {} # empty/skip
 }
@@ -48,8 +45,8 @@ variable "github_team_childs" {
     # key = name
     description = string
     #privacy     = string # always closed
-    parent_team               = string
-    create_default_maintainer = bool
+    parent_team = string
+    maintainer  = bool
   }))
   default = {} # empty/skip
 }
@@ -57,11 +54,8 @@ variable "github_team_childs" {
 # github_team_membership
 variable "github_team_members" {
   description = "Add/remove users from teams in your organization."
-  type = map(object({
-    # key = teamname/username
-    role = string
-  }))
-  default = {} # empty/skip
+  type        = map(string) # "team/username" = "role"
+  default     = {}          # empty/skip
 }
 
 # github_repository
