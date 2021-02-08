@@ -3,7 +3,7 @@
 # github_user_ssh_key
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_ssh_key
 resource "github_user_ssh_key" "this" {
-  for_each = var.github_user_ssh_keys
+  for_each = var.user_ssh_keys
 
   title = each.key
   key   = each.value.key
@@ -12,7 +12,7 @@ resource "github_user_ssh_key" "this" {
 # github_user_gpg_key
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_gpg_key
 resource "github_user_gpg_key" "this" {
-  for_each = var.github_user_gpg_keys
+  for_each = var.user_gpg_keys
 
   # each.key is unused here
   armored_public_key = each.value.armored_public_key
@@ -21,7 +21,7 @@ resource "github_user_gpg_key" "this" {
 # github_membership
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership
 resource "github_membership" "this" {
-  for_each = var.github_memberships
+  for_each = var.memberships
 
   username = each.key
   role     = each.value
@@ -30,7 +30,7 @@ resource "github_membership" "this" {
 # github_team
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team
 resource "github_team" "root" {
-  for_each = var.github_team_roots
+  for_each = var.team_roots
 
   name                      = each.key
   description               = each.value.description
@@ -39,7 +39,7 @@ resource "github_team" "root" {
 }
 
 resource "github_team" "child" {
-  for_each = var.github_team_childs
+  for_each = var.team_childs
 
   name                      = each.key
   description               = each.value.description
@@ -49,19 +49,19 @@ resource "github_team" "child" {
 }
 
 locals {
-  github_teams = merge(github_team.root, github_team.child)
+  teams = merge(github_team.root, github_team.child)
 }
 
 # github_team_membership
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership
 resource "github_team_membership" "this" {
-  for_each = var.github_team_members
+  for_each = var.team_memberships
   depends_on = [
     github_team.root,
     github_team.child
   ]
 
-  team_id  = local.github_teams[split("/", each.key)[0]].id
+  team_id  = local.teams[split("/", each.key)[0]].id
   username = split("/", each.key)[1]
   role     = each.value
 }
@@ -69,7 +69,7 @@ resource "github_team_membership" "this" {
 # github_repository
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
 resource "github_repository" "this" {
-  for_each = var.github_repositories
+  for_each = var.repositories
   depends_on = [
     github_team.root,
     github_team.child
@@ -119,28 +119,15 @@ resource "github_repository" "this" {
 
 # github_team_repository
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository
-#resource "github_team_repository" "this" {
-#  depends_on = [
-#    github_team.root,
-#    github_team.child,
-#    github_repository.this
-#  ]
-#  for_each = var.github_team_repositories
-#
-#  team_id    = local.github_teams[each.value.team_name].id
-#  repository = each.key
-#  permission = each.value.permission
-#}
-
 resource "github_team_repository" "this" {
   depends_on = [
     github_team.root,
     github_team.child,
     github_repository.this
   ]
-  for_each = var.github_repositories
+  for_each = var.team_repositories
 
-  team_id    = local.github_teams[each.value.team].id
-  repository = each.key
-  permission = each.value.team_permission
+  repository = split("/", each.key)[1]
+  team_id    = local.teams[split("/", each.key)[0]].id
+  permission = each.value
 }

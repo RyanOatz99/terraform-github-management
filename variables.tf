@@ -1,7 +1,7 @@
 # vim: set ft=terraform :
 
 # github_user_ssh_key
-variable "github_user_ssh_keys" {
+variable "user_ssh_keys" {
   description = "Add/remove SSH keys from your user account."
   type = map(object({
     # key = title
@@ -11,7 +11,7 @@ variable "github_user_ssh_keys" {
 }
 
 # github_user_gpg_key
-variable "github_user_gpg_keys" {
+variable "user_gpg_keys" {
   description = "Add/remove GPG keys from your user account."
   type = map(object({
     # key = title/name
@@ -21,30 +21,29 @@ variable "github_user_gpg_keys" {
 }
 
 # github_membership
-variable "github_memberships" {
+variable "memberships" {
   description = "Add/remove users from your organization."
   type        = map(string) # "username" = "role"
   default     = {}
 }
 
 # github_team
-variable "github_team_roots" {
+variable "team_roots" {
   description = "Add/remove teams from your organization."
   type = map(object({
     # key = name
     description = string
-    privacy     = string
+    privacy     = string # must be closed for childs
     maintainer  = bool
   }))
   default = {} # empty/skip
 }
 
-variable "github_team_childs" {
+variable "team_childs" {
   description = "Add/remove teams with parent from your organization."
   type = map(object({
     # key = name
     description = string
-    #privacy     = string # always closed
     parent_team = string
     maintainer  = bool
   }))
@@ -52,14 +51,14 @@ variable "github_team_childs" {
 }
 
 # github_team_membership
-variable "github_team_members" {
+variable "team_memberships" {
   description = "Add/remove users from teams in your organization."
   type        = map(string) # "team/username" = "role"
   default     = {}          # empty/skip
 }
 
 # github_repository
-variable "github_repositories" {
+variable "repositories" {
   description = "Create and manage repositories within your GitHub organization or personal account."
   type = map(object({
     # key = name
@@ -92,19 +91,12 @@ variable "github_repositories" {
       # key = repository
       owner = string
     }))
-
-    team            = string
-    team_permission = string
   }))
 }
 
 # github_team_repository
-variable "github_team_repositories" {
+variable "team_repositories" {
   description = "Manages relationships between teams and repositories in your GitHub organization."
-  type = map(object({
-    # key = repository
-    team_name  = string
-    permission = string
-  }))
-  default = {} # empty/skip
+  type        = map(string) # "team/repository" = "permission"
+  default     = {}
 }
