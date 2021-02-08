@@ -16,7 +16,7 @@ provider "github" {
 module "github-personal" {
   source = "../.."
 
-  github_repositories = {
+  repositories = {
     "my-repo" = { # repository name
       description            = "My GitHub repository"
       homepage_url           = "https://my-repo.tld"

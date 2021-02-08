@@ -16,52 +16,43 @@ provider "github" {
 module "github-organization" {
   source = "../.."
 
-  github_memberships = {
-    "my_github_member" = { # account name
-      role = "member"
-    },
-
-    "my_github_admin" = {
-      role = "admin"
-    },
-
+  memberships = {
+    "my_github_member" = "member" # "username" = "role"
+    "my_github_admin"  = "admin"
     # ...
   }
 
-  github_team_roots = {
+  team_roots = {
     "admin" = { # team name
       description = "Organization Admin"
       privacy     = "secret"
+      maintainer  = false # creator is maintainer
     },
 
     "developer" = {
       description = "Organization Developer"
       privacy     = "closed"
+      maintainer  = false
     },
 
     # ...
   }
 
-  github_team_childs = {
+  team_childs = {
     "terraform" = {
       description = "Terraformer"
       parent_team = "developer"
+      maintainer  = false
     },
   }
 
-  github_team_members = {
-    "developer/my_github_member" = { # using <team_name>/<member_name>
-      role = "member"
-    },
-
-    "admin/my_github_admin" = {
-      role = "maintainer"
-    },
-
+  team_memberships = {
+    "developer/my_github_member" = "member" # using "team/username" = "role"
+    "admin/my_github_admin"      = "maintainer"
     # ...
   }
 
-  github_repositories = {
+  repositories = {
     "my-org-repo" = { # repository name
       description            = "My GitHub Origanization repository"
       homepage_url           = "https://my-org-repo.tld"
@@ -103,12 +94,8 @@ module "github-organization" {
     # ...
   }
 
-  github_team_repositories = {
-    "my-org-repo" = { # repository name
-      team_name  = "admin"
-      permission = "maintain"
-    },
-
+  team_repositories = {
+    "admin/my-org-repo" = "maintain" # "team/repository" = "permission"
     # ...
   }
 }
