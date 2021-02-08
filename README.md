@@ -37,7 +37,7 @@ The following providers are used by this module:
 
 The following input variables are required:
 
-### github_repositories
+### repositories
 
 Description: Create and manage repositories within your GitHub organization or personal account.
 
@@ -82,7 +82,7 @@ map(object({
 
 The following input variables are optional (have default values):
 
-### github_user_ssh_keys
+### user_ssh_keys
 
 Description: Add/remove SSH keys from your user account.
 
@@ -97,7 +97,7 @@ map(object({
 
 Default: `{}`
 
-### github_user_gpg_keys
+### user_gpg_keys
 
 Description: Add/remove GPG keys from your user account.
 
@@ -112,22 +112,15 @@ map(object({
 
 Default: `{}`
 
-### github_memberships
+### memberships
 
 Description: Add/remove users from your organization.
 
-Type:
-
-```hcl
-map(object({
-    # key = username
-    role = string
-  }))
-```
+Type: `map(string)`
 
 Default: `{}`
 
-### github_team_roots
+### team_roots
 
 Description: Add/remove teams from your organization.
 
@@ -136,15 +129,15 @@ Type:
 ```hcl
 map(object({
     # key = name
-    description               = string
-    privacy                   = string
-    create_default_maintainer = bool
+    description = string
+    privacy     = string # must be closed for childs
+    maintainer  = bool
   }))
 ```
 
 Default: `{}`
 
-### github_team_childs
+### team_childs
 
 Description: Add/remove teams with parent from your organization.
 
@@ -154,42 +147,26 @@ Type:
 map(object({
     # key = name
     description = string
-    #privacy     = string # always closed
-    parent_team               = string
-    create_default_maintainer = bool
+    parent_team = string
+    maintainer  = bool
   }))
 ```
 
 Default: `{}`
 
-### github_team_members
+### team_memberships
 
 Description: Add/remove users from teams in your organization.
 
-Type:
-
-```hcl
-map(object({
-    # key = teamname/username
-    role = string
-  }))
-```
+Type: `map(string)`
 
 Default: `{}`
 
-### github_team_repositories
+### team_repositories
 
 Description: Manages relationships between teams and repositories in your GitHub organization.
 
-Type:
-
-```hcl
-map(object({
-    # key = repository
-    team_name  = string
-    permission = string
-  }))
-```
+Type: `map(string)`
 
 Default: `{}`
 
