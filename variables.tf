@@ -92,6 +92,9 @@ variable "github_repositories" {
       # key = repository
       owner = string
     }))
+
+    team            = string
+    team_permission = string
   }))
 }
 

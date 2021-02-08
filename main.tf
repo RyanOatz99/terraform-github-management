@@ -119,15 +119,28 @@ resource "github_repository" "this" {
 
 # github_team_repository
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository
+#resource "github_team_repository" "this" {
+#  depends_on = [
+#    github_team.root,
+#    github_team.child,
+#    github_repository.this
+#  ]
+#  for_each = var.github_team_repositories
+#
+#  team_id    = local.github_teams[each.value.team_name].id
+#  repository = each.key
+#  permission = each.value.permission
+#}
+
 resource "github_team_repository" "this" {
   depends_on = [
     github_team.root,
     github_team.child,
     github_repository.this
   ]
-  for_each = var.github_team_repositories
+  for_each = var.github_repositories
 
-  team_id    = local.github_teams[each.value.team_name].id
+  team_id    = local.github_teams[each.value.team].id
   repository = each.key
-  permission = each.value.permission
+  permission = each.value.team_permission
 }
