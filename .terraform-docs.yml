@@ -2,7 +2,6 @@
 
 formatter: markdown document
 header-from: .terraform-docs-header.md
-
 sections:
   hide-all: true
   show:
@@ -11,16 +10,13 @@ sections:
     - outputs
     - providers
     - requirements
-
 #output-values:
 #  enabled: true
 #  from: ""
-
 sort:
   enabled: false
   by:
     - required
-
 settings:
   color: true
   escape: false
