@@ -9,6 +9,7 @@ sections:
     - inputs
     - outputs
     - providers
+    - resources
     - requirements
 #output-values:
 #  enabled: true
