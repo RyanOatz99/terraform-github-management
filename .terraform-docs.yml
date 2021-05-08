@@ -1,26 +1,44 @@
 ---
 
+version: ">= 0.13.0, < 1.0.0"
+
 formatter: markdown document
-header-from: .terraform-docs-header.md
+
 sections:
-  hide-all: true
+  hide: []
   show:
+    - data-sources
     - header
+    - footer
     - inputs
+    - modules
     - outputs
     - providers
-    - resources
     - requirements
-#output-values:
-#  enabled: true
-#  from: ""
-sort:
+    - resources
+
+output:
+  file: "README.md"
+  mode: inject
+  template: |-
+    <!-- TF_DOCS_BEGIN -->
+    {{ .Content }}
+    <!-- TF_DOCS_END -->
+
+output-values:
   enabled: false
-  by:
-    - required
+  from: ""
+
+sort:
+  enabled: true
+  by: required
+
 settings:
+  anchor: true
   color: true
+  default: true
   escape: false
   indent: 2
   required: true
   sensitive: true
+  type: true
