@@ -24,7 +24,7 @@ variable "user_gpg_keys" {
 variable "memberships" {
   description = "Add/remove users from your organization."
   type        = map(string) # "username" = "role"
-  default     = {}
+  default     = {}          # empty/skip
 }
 
 # github_team
