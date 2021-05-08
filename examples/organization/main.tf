@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "github" {
-  organization = "my_github_organization" # or use `export GITHUB_ORGANIZATION="my_github_organization"`
-  token        = "my_github_token"        # or use `export GITHUB_TOKEN="my_github_token"`
+  owner = "my_github_organization" # or use `export GITHUB_OWNER="my_github_organization"`
+  token = "my_github_token"        # or use `export GITHUB_TOKEN="my_github_token"`
 }
 
 module "github-organization" {
