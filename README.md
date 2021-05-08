@@ -1,39 +1,43 @@
-[//]: # ( vim: set ft=markdown : )
-# GitHub Terraform module
+# Terraform GitHub module
 
-Terraform module which manages your GitHub personal/organization's repositories, members and teams.
+Terraform module which manages your GitHub personal/organization repositories, members and teams.
 
 ## Examples
 
  * [Organization](https://github.com/sh0shin/terraform-module-github/tree/master/examples/organization/main.tf)
  * [Personal](https://github.com/sh0shin/terraform-module-github/blob/master/examples/personal/main.tf)
 
+<!-- TF_DOCS_BEGIN -->
 ## Requirements
 
 The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement_terraform) (~>0.14)
 
-- <a name="requirement_github"></a> [github](#requirement_github) (4.9.1)
+- <a name="requirement_github"></a> [github](#requirement_github) (~>4.9)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_github"></a> [github](#provider_github) (4.9.1)
+- <a name="provider_github"></a> [github](#provider_github) (~>4.9)
+
+## Modules
+
+No modules.
 
 ## Resources
 
 The following resources are used by this module:
 
-- [github_membership.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/membership) (resource)
-- [github_repository.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/repository) (resource)
-- [github_team.child](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/team) (resource)
-- [github_team.root](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/team) (resource)
-- [github_team_membership.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/team_membership) (resource)
-- [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/team_repository) (resource)
-- [github_user_gpg_key.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/user_gpg_key) (resource)
-- [github_user_ssh_key.this](https://registry.terraform.io/providers/integrations/github/4.9.1/docs/resources/user_ssh_key) (resource)
+- [github_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership) (resource)
+- [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) (resource)
+- [github_team.child](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) (resource)
+- [github_team.root](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) (resource)
+- [github_team_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) (resource)
+- [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository) (resource)
+- [github_user_gpg_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_gpg_key) (resource)
+- [github_user_ssh_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_ssh_key) (resource)
 
 ## Required Inputs
 
@@ -84,58 +88,11 @@ map(object({
 
 The following input variables are optional (have default values):
 
-### <a name="input_user_ssh_keys"></a> [user_ssh_keys](#input_user_ssh_keys)
-
-Description: Add/remove SSH keys from your user account.
-
-Type:
-
-```hcl
-map(object({
-    # key = title
-    key = string
-  }))
-```
-
-Default: `{}`
-
-### <a name="input_user_gpg_keys"></a> [user_gpg_keys](#input_user_gpg_keys)
-
-Description: Add/remove GPG keys from your user account.
-
-Type:
-
-```hcl
-map(object({
-    # key = title/name
-    armored_public_key = string
-  }))
-```
-
-Default: `{}`
-
 ### <a name="input_memberships"></a> [memberships](#input_memberships)
 
 Description: Add/remove users from your organization.
 
 Type: `map(string)`
-
-Default: `{}`
-
-### <a name="input_team_roots"></a> [team_roots](#input_team_roots)
-
-Description: Add/remove teams from your organization.
-
-Type:
-
-```hcl
-map(object({
-    # key = name
-    description = string
-    privacy     = string # must be closed for childs
-    maintainer  = bool
-  }))
-```
 
 Default: `{}`
 
@@ -172,17 +129,56 @@ Type: `map(string)`
 
 Default: `{}`
 
+### <a name="input_team_roots"></a> [team_roots](#input_team_roots)
+
+Description: Add/remove teams from your organization.
+
+Type:
+
+```hcl
+map(object({
+    # key = name
+    description = string
+    privacy     = string # must be closed for childs
+    maintainer  = bool
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_user_gpg_keys"></a> [user_gpg_keys](#input_user_gpg_keys)
+
+Description: Add/remove GPG keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title/name
+    armored_public_key = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_user_ssh_keys"></a> [user_ssh_keys](#input_user_ssh_keys)
+
+Description: Add/remove SSH keys from your user account.
+
+Type:
+
+```hcl
+map(object({
+    # key = title
+    key = string
+  }))
+```
+
+Default: `{}`
+
 ## Outputs
 
 The following outputs are exported:
-
-### <a name="output_team_root_ids"></a> [team_root_ids](#output_team_root_ids)
-
-Description: The IDs of the created root teams.
-
-### <a name="output_team_child_ids"></a> [team_child_ids](#output_team_child_ids)
-
-Description: The IDs of the created child teams.
 
 ### <a name="output_repo_git_clone_urls"></a> [repo_git_clone_urls](#output_repo_git_clone_urls)
 
@@ -195,3 +191,12 @@ Description: URLs that can be provided to `git clone` to clone the repository vi
 ### <a name="output_repo_ssh_clone_urls"></a> [repo_ssh_clone_urls](#output_repo_ssh_clone_urls)
 
 Description: URLs that can be provided to `git clone` to clone the repository via SSH.
+
+### <a name="output_team_child_ids"></a> [team_child_ids](#output_team_child_ids)
+
+Description: The IDs of the created child teams.
+
+### <a name="output_team_root_ids"></a> [team_root_ids](#output_team_root_ids)
+
+Description: The IDs of the created root teams.
+<!-- TF_DOCS_END -->
